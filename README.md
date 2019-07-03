@@ -2,7 +2,7 @@
 Ability to get the time whenever you are !
 
 ## Features
-- [*] Get the time according to the device's timezone or default.
+- [x] Get the time according to the device's timezone or default.
 - [ ] Get the time in a city.
 - [ ] Get the time in a country.
 
@@ -51,4 +51,4 @@ Content-Type: text/plain; charset=utf-8
 
 ## CHANGELOGS
 - [Application changelog](CHANGELOG.md)
-- [Helm chart changelog](clock-ability/helm/ability-cinema/CHANGELOG.md)
+- [Helm chart changelog](clock-ability/helm/ability-clock/CHANGELOG.md)

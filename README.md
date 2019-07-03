@@ -2,7 +2,7 @@
 Ability to get the time whenever you are !
 
 ## Features
-- [*] Get the time according to the device's timezone or default.
+- [x] Get the time according to the device's timezone or default.
 - [ ] Get the time in a city.
 - [ ] Get the time in a country.
 

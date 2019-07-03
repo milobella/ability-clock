@@ -28,7 +28,7 @@ RUN go get -u github.com/golang/dep/cmd/dep
 # Push the current repository into the srcs and define it as working dir
 ENV GOPATH_SOURCES="$GOPATH/src"
 ENV APPLICATION_SOURCES="$GOPATH_SOURCES/$GITLAB_HOST/$PROJECT_NAME/$MODULE_NAME"
-COPY .. $APPLICATION_SOURCES
+COPY . $APPLICATION_SOURCES
 WORKDIR $APPLICATION_SOURCES
 
 # gitlab.milobella.com security (necessary for dep ensure)

@@ -1,7 +1,7 @@
 package main
 
 import (
-	"gitlab.milobella.com/milobella/ability-sdk-go/pkg/ability"
+	"milobella.com/gitlab/milobella/ability-sdk-go/pkg/ability"
 	"os"
 	"time"
 	"fmt"

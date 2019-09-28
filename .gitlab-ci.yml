@@ -12,6 +12,5 @@ variables:
   DH_REGISTRY_IMAGE: $DOCKER_USER/$CI_PROJECT_NAME
   PROJECT_NAME: "milobella"
   MODULE_NAME: ${CI_PROJECT_NAME}
-  GITLAB_HOST: "gitlab.milobella.com"
   MODULE_DESCRIPTION: "Ability to get the time whenever you are !"
   HELM_NAME: "ability-clock"

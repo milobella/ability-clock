@@ -10,12 +10,10 @@ Ability to get the time whenever you are !
 
 - Having access to [milobella.com/gitlab](https://milobella.com/gitlab/milobella)
 - Having ``golang`` installed [instructions](https://golang.org/doc/install)
-- Having ``go dep`` installed [instructions](https://golang.github.io/dep/docs/installation.html)
 
 ## Build
 
 ```bash
-$ dep ensure
 $ go build -o bin/ability cmd/ability/main.go
 ```
 

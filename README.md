@@ -8,7 +8,7 @@ Ability to get the time whenever you are !
 
 ## Prerequisites
 
-- Having access to [milobella.com/gitlab](https://milobella.com/gitlab/milobella)
+- Having access to [github.com](https://github.com/milobella)
 - Having ``golang`` installed [instructions](https://golang.org/doc/install)
 
 ## Build

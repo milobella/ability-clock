@@ -1,10 +1,10 @@
 package main
 
 import (
-	"milobella.com/gitlab/milobella/ability-sdk-go/pkg/ability"
+	"fmt"
+	"github.com/milobella/ability-sdk-go/pkg/ability"
 	"os"
 	"time"
-	"fmt"
 
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/viper"

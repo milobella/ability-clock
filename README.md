@@ -1,5 +1,5 @@
-# clock
-Ability to get the time whenever you are !
+# Clock Ability
+Milobella Ability to get the time whenever and wherever you are !
 
 ## Features
 - [x] Get the time according to the device's timezone or default.
@@ -8,7 +8,6 @@ Ability to get the time whenever you are !
 
 ## Prerequisites
 
-- Having access to [github.com](https://github.com/milobella)
 - Having ``golang`` installed [instructions](https://golang.org/doc/install)
 
 ## Build
@@ -46,7 +45,3 @@ Content-Type: text/plain; charset=utf-8
 
 {"nlg":{"sentence":"It is {{time}}","params":[{"name":"time","value":"14 h 34","type":"time"}]},"context":{"slot_filling":{}}}
 ```
-
-## CHANGELOGS
-- [Application changelog](CHANGELOG.md)
-- [Helm chart changelog](clock-ability/helm/ability-clock/CHANGELOG.md)

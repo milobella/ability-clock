@@ -1,4 +1,0 @@
-apiVersion: v1
-description: Ability to get the time whenever you are !
-name: ability-clock
-version: 0.1.0

@@ -26,7 +26,7 @@ $ bin/ability
 
 #### Get the time in default timezone
 ```bash
-$ curl -i -X POST http://localhost:4444/resolve -d '{"nlu":{"BestIntent": "GET_TIME"}}'             130 ↵
+$ curl -i -H "Content-Type":"application/json" -X POST http://localhost:4444/resolve -d '{"nlu":{"BestIntent": "GET_TIME"}}'             130 ↵
 HTTP/1.1 200 OK
 Date: Wed, 03 Jul 2019 06:33:51 GMT
 Content-Length: 126
@@ -37,7 +37,7 @@ Content-Type: text/plain; charset=utf-8
 
 #### Get the time in shanghai
 ```bash
-$ curl -i -X POST http://localhost:4444/resolve -d '{"nlu":{"BestIntent": "GET_TIME"}, "device": {"state": {"timezone": "Asia/Shanghai"}}}'
+$ curl -i -H "Content-Type":"application/json" -X POST http://localhost:4444/resolve -d '{"nlu":{"BestIntent": "GET_TIME"}, "device": {"state": {"timezone": "Asia/Shanghai"}}}'
 HTTP/1.1 200 OK
 Date: Wed, 03 Jul 2019 06:34:38 GMT
 Content-Length: 127

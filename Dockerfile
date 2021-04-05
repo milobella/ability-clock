@@ -9,7 +9,7 @@ RUN apk add --no-cache tzdata
 
 COPY . /src
 WORKDIR /src
-RUN go build -o bin/main cmd/ability/main.go
+RUN go build -tags=timetzdata -o bin/main cmd/ability/main.go
 ########################################################################
 
 

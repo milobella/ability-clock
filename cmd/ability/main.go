@@ -3,9 +3,11 @@ package main
 import (
 	"fmt"
 	"github.com/milobella/ability-sdk-go/pkg/ability"
-	"github.com/sirupsen/logrus"
+	"github.com/tkuchiki/go-timezone"
 	"time"
 )
+
+const defaultTimezoneLocation = "Europe/Paris"
 
 // fun main()
 func main() {
@@ -20,8 +22,15 @@ func main() {
 }
 
 func GetTimeIntentHandler(request *ability.Request, resp *ability.Response) {
-	location := extractTimeLocation(request)
-	now := time.Now().In(location)
+	tz := timezone.New()
+	location := getTimezoneLocation(request)
+	now, err := tz.FixedTimezone(time.Now(), location)
+	if err != nil {
+		resp.Nlg = ability.NLG{
+			Sentence: "Error",
+		}
+		return
+	}
 	timeVal := fmt.Sprintf("%d h %d", now.Hour(), now.Minute())
 	resp.Nlg = ability.NLG{
 		Sentence: "It is {{time}}",
@@ -32,27 +41,14 @@ func GetTimeIntentHandler(request *ability.Request, resp *ability.Response) {
 		}}}
 }
 
-func defaultLocation() *time.Location {
-	if result, err := time.LoadLocation("Europe/Paris"); err != nil {
-		logrus.Errorf("Fatal error trying to parse the default-timezone: %s \n", err)
-		return nil
-	} else {
-		return result
-	}
-}
-
-func extractTimeLocation(request *ability.Request) *time.Location {
-	timezone, ok := request.Device.State["timezone"]
+func getTimezoneLocation(request *ability.Request) string {
+	location, ok := request.Device.State["timezone"]
 	if !ok {
-		return defaultLocation()
+		return defaultTimezoneLocation
 	}
-	timezoneStr, ok := timezone.(string)
+	locationStr, ok := location.(string)
 	if !ok {
-		return defaultLocation()
+		return defaultTimezoneLocation
 	}
-	loc, err := time.LoadLocation(timezoneStr)
-	if err != nil {
-		return defaultLocation()
-	}
-	return loc
+	return locationStr
 }

@@ -5,6 +5,8 @@
 ### builder stage : Build the golang application in src folder
 FROM golang:1.16-alpine as builder
 
+RUN apk add --no-cache tzdata
+
 COPY . /src
 WORKDIR /src
 RUN go build -o bin/main cmd/ability/main.go
@@ -42,7 +44,9 @@ ENV CONFIGURATION_PATH=/etc/ability/config.toml
 ENV BINARY_PATH=/bin/ability
 ENV ZONEINFO=/zoneinfo.zip
 
+COPY --from=builder /usr/sbin/zdump /usr/sbin/zdump
 COPY --from=builder /usr/local/go/lib/time/zoneinfo.zip /zoneinfo.zip
+COPY --from=builder /usr/share/zoneinfo /usr/share/zoneinfo
 COPY --from=builder /src/config.toml ${CONFIGURATION_PATH}
 COPY --from=builder /src/bin/main $BINARY_PATH
 

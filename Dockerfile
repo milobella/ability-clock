@@ -42,7 +42,9 @@ LABEL org.label-schema.docker.cmd="docker run -it $DOCKER_IMAGE:$BUILD_VERSION"
 # Two files are necessary from the build stage : the configuration and the binary
 ENV CONFIGURATION_PATH=/etc/ability/config.toml
 ENV BINARY_PATH=/bin/ability
+ENV ZONEINFO=/zoneinfo.zip
 
+COPY --from=builder /usr/local/go/lib/time/zoneinfo.zip /zoneinfo.zip
 COPY --from=builder /usr/share/zoneinfo /usr/share/zoneinfo
 COPY --from=builder /src/config.toml ${CONFIGURATION_PATH}
 COPY --from=builder /src/bin/main $BINARY_PATH

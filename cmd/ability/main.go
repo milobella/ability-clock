@@ -2,9 +2,13 @@ package main
 
 import (
 	"fmt"
-	"github.com/milobella/ability-sdk-go/pkg/ability"
-	"github.com/tkuchiki/go-timezone"
 	"time"
+
+	"github.com/milobella/ability-sdk-go/pkg/config"
+	"github.com/milobella/ability-sdk-go/pkg/model"
+	"github.com/milobella/ability-sdk-go/pkg/server"
+	"github.com/milobella/ability-sdk-go/pkg/server/conditions"
+	"github.com/tkuchiki/go-timezone"
 )
 
 const defaultTimezoneLocation = "Europe/Paris"
@@ -13,35 +17,35 @@ const defaultTimezoneLocation = "Europe/Paris"
 func main() {
 
 	// Read configuration
-	conf := ability.ReadConfiguration()
+	conf := config.Read()
 
 	// Initialize server
-	server := ability.NewServer("Clock Ability", conf.Server.Port)
-	server.RegisterIntentRule("GET_TIME", GetTimeIntentHandler)
-	server.Serve()
+	srv := server.New("Clock", conf.Server.Port)
+	srv.Register(conditions.IfIntents("GET_TIME"), GetTimeIntentHandler)
+	srv.Serve()
 }
 
-func GetTimeIntentHandler(request *ability.Request, resp *ability.Response) {
+func GetTimeIntentHandler(request *model.Request, resp *model.Response) {
 	tz := timezone.New()
 	location := getTimezoneLocation(request)
 	now, err := tz.FixedTimezone(time.Now(), location)
 	if err != nil {
-		resp.Nlg = ability.NLG{
+		resp.Nlg = model.NLG{
 			Sentence: "Error",
 		}
 		return
 	}
 	timeVal := fmt.Sprintf("%d h %d", now.Hour(), now.Minute())
-	resp.Nlg = ability.NLG{
+	resp.Nlg = model.NLG{
 		Sentence: "It is {{time}}",
-		Params: []ability.NLGParam{{
+		Params: []model.NLGParam{{
 			Name:  "time",
 			Value: timeVal,
 			Type:  "time",
 		}}}
 }
 
-func getTimezoneLocation(request *ability.Request) string {
+func getTimezoneLocation(request *model.Request) string {
 	location, ok := request.Device.State["timezone"]
 	if !ok {
 		return defaultTimezoneLocation
